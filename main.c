@@ -49,6 +49,10 @@ int main(int argc, char *argv[]) {
 
     printf("Total number of vertices: %d\n",numberOfVertices-1);
     FreeVertices(vertices,numberOfVertices);
+    free(Next);
+    free(floyDistance);
+    free(betweennessSorted);
+    free(closenessSorted);
     free(vertices);
     fclose(networkFile); // Close the file when done
     return 0;

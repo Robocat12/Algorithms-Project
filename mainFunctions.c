@@ -21,6 +21,7 @@ int GetNumOfVertices(char * filename){
     fclose(file);
     return biggestNumber;
 }
+//Creates an array of vertices based on the file provided.
 vertex *InitializeVertices(int numberOfVertices,FILE *file){
     
     vertex *vertices = calloc(numberOfVertices,sizeof(vertex));
