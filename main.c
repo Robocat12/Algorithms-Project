@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
         return -1;
     }
     //PrintConnections(vertices,numberOfVertices);
-    PrintVertex(vertices[666],666);
+    //PrintVertex(vertices[666],666);
     printf("Total number of vertices: %d\n",numberOfVertices-1);
     FreeVertices(vertices,numberOfVertices);
     free(vertices);
