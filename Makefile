@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -g
-DEPS = main.c
-OBJ = main.o
+DEPS = functions.h
+OBJ = main.o printFunctions.o mainFunctions.o
 BIN = main
 FILE = test1
 
