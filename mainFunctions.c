@@ -117,7 +117,7 @@ int *FloydWarshall(vertex *vertices, int numbOfVertices,int **NextConnection){
     //calculates the matrixes
     printf("Calculating Floyd-Warshall. O(n^3) may take a few minutes\n");
     for ( k = 0; k < numbOfVertices; k++) {
-        if(k%10==0)printf("meomory: current progress = %d / %d\n",k,numbOfVertices);
+        if(k%10==0)printf("memory: current progress = %d / %d\n",k,numbOfVertices);
         for ( i = 0; i < numbOfVertices; i++) {
             for ( j = 0; j < numbOfVertices; j++) {
 
