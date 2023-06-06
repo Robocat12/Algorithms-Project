@@ -5,7 +5,8 @@
 #include <string.h>
 #define null ((void *)0)
 #define INF INT16_MAX*2
-
+#define true 1
+#define false 0
 
 typedef struct vertex{
     int numberOfConnections;
@@ -30,8 +31,8 @@ extern int FreeVertices(vertex *vertices, int numbOfVertices);
 
 extern int *FloydWarshall(vertex *vertices, int numbOfVertices,int **NextConnection);
 
-extern NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices);
-extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices);
+extern NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices,int boolSort);
+extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolSort);
 
 extern void PrintNodeSorted(NodeCount *array,int size ,int maxNum);
 

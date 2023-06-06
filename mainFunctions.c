@@ -141,7 +141,7 @@ int *FloydWarshall(vertex *vertices, int numbOfVertices,int **NextConnection){
 //sorts the APSP distance matrix from lower to higher and returns it
 //each node has the total number of distance instead of avg
 //so as not to use floating points
-NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices){
+NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices,int boolSort){
     int i,j;
 
     int *pathCount=calloc(numbOfVertices,sizeof(int));
@@ -161,11 +161,13 @@ NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices){
         nodeCounts[i].index = i;
         nodeCounts[i].count = pathCount[i];
     }
-    qsort(nodeCounts, numbOfVertices, sizeof(NodeCount), compareNodeCountsReverse);
+    if(boolSort==true){
+        qsort(nodeCounts, numbOfVertices, sizeof(NodeCount), compareNodeCountsReverse);
+    }
     return nodeCounts;
 }
 //sorts the APSP betweenness matrix from high to low and returns it
-NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices){
+NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolSort){
     int i,j;
 
    
@@ -186,7 +188,9 @@ NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices){
         nodeCounts[i].index = i;
         nodeCounts[i].count = pathCount[i];
     }
-    qsort(nodeCounts, numbOfVertices, sizeof(NodeCount), compareNodeCounts);
+    if(boolSort==true){
+        qsort(nodeCounts, numbOfVertices, sizeof(NodeCount), compareNodeCounts);
+    }
     return nodeCounts;
 }
 
