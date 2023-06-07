@@ -37,6 +37,6 @@ extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,in
 extern void PrintNodeSorted(NodeCount *array,int size ,int maxNum);
 extern int GetIdOfRanking(NodeCount *array, int size, int lookingFor);
 
-int kendal ( char* filename );
+double kendal ( const unsigned int* rankPtr, const unsigned int size );
 
 #endif

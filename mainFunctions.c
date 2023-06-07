@@ -202,3 +202,21 @@ int GetIdOfRanking(NodeCount *array, int size, int lookingFor){
         }
     }
 }
+
+double kendal ( const unsigned int* rankPtr, const unsigned int size ) {
+
+    unsigned int counter1, counter2, val, disc_pairs = 0, numpairs;
+    double kendal;
+
+    for ( counter1 = 0; counter1 < (size - 1); counter1++ ) {
+        val = rankPtr[counter1];
+        for ( counter2 = (counter1 + 1); counter2 < size; counter2++ ) {
+            if ( val > rankPtr[counter2] ) {
+                disc_pairs++;
+            }
+        }
+    }
+    numpairs = (size*(size - 1) /2);
+    kendal =  1 - ((2* (double) disc_pairs)/( (double) numpairs));
+    return kendal;
+}

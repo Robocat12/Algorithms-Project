@@ -48,23 +48,20 @@ int main(int argc, char *argv[]) {
     printf("The closeness array is (total distance)(smaller is better):\n");
     PrintNodeSorted(closenessSorted,numberOfVertices,10);
     
-    if ( access("output", F_OK) == 0 ) {
-        fprintf(stderr, "File ""output"" exists, aborting calling kendal.\n");
-    }
-    else {
-        FILE* out;
-
-        if ((out = fopen("output", "w")) == NULL) {
-            fprintf(stderr, "Error creating file ""output""\n");
-            return -3; //Free function?
-        }
-        for(int i=0;i<numberOfVertices;i++){
-            fprintf(out, "%d ", closenessSorted[i].index);
-        }
-        fclose(out);
-        kendal( "output" );
+    /*With the betweeness being sorted in ascending order, we only need to compare the rankings of closeness.
+    Each pair of betweenes and closeness refers to the same node*/
+    unsigned int* rankPtr = (unsigned int*) malloc( numberOfVertices*sizeof(unsigned int) );
+    if ( rankPtr == NULL ) {
+        printf("Not enough memory to allocate for array creation.\n");
+        return -3;
     }
 
+    for( unsigned int vertice=0; vertice<numberOfVertices; vertice++ ){
+        rankPtr[vertice] = closenessSorted[vertice].index;
+    }
+    printf("Kendal coefficient is: %.3lf\n", kendal( rankPtr, numberOfVertices ));
+
+    free(rankPtr);
     FreeVertices(vertices,numberOfVertices);
     free(Next);
     free(floyDistance);
