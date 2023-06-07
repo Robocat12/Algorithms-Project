@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include "functions.h"
 
 int main(int argc, char *argv[]) {
@@ -46,17 +47,23 @@ int main(int argc, char *argv[]) {
 
     printf("The closeness array is (total distance)(smaller is better):\n");
     PrintNodeSorted(closenessSorted,numberOfVertices,10);
-
-    printf("Total number of vertices: %d\n",numberOfVertices-1);
-    int betweenID=-1;
-    int closenessID=-1;
-    for(int i=0;i<numberOfVertices;i++){
-
-        betweenID = betweennessSorted[i].index;
-        closenessID = GetIdOfRanking(closenessID,numberOfVertices,betweenID);
-        //do shit for this
+    
+    if ( access("output", F_OK) == 0 ) {
+        fprintf(stderr, "File ""output"" exists, aborting calling kendal.\n");
     }
+    else {
+        FILE* out;
 
+        if ((out = fopen("output", "w")) == NULL) {
+            fprintf(stderr, "Error creating file ""output""\n");
+            return -3; //Free function?
+        }
+        for(int i=0;i<numberOfVertices;i++){
+            fprintf(out, "%d ", closenessSorted[i].index);
+        }
+        fclose(out);
+        kendal( "output" );
+    }
 
     FreeVertices(vertices,numberOfVertices);
     free(Next);
