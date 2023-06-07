@@ -35,5 +35,6 @@ extern NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices,int 
 extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolSort);
 
 extern void PrintNodeSorted(NodeCount *array,int size ,int maxNum);
+extern int GetIdOfRanking(NodeCount *array, int size, int lookingFor);
 
 #endif

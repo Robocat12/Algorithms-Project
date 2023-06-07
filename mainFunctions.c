@@ -194,3 +194,11 @@ NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolS
     return nodeCounts;
 }
 
+int GetIdOfRanking(NodeCount *array, int size, int lookingFor){
+    int i=0;
+    for(i=0;i<size;i++){
+        if(array[i].index==lookingFor){
+            return i;
+        }
+    }
+}

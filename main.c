@@ -48,6 +48,16 @@ int main(int argc, char *argv[]) {
     PrintNodeSorted(closenessSorted,numberOfVertices,10);
 
     printf("Total number of vertices: %d\n",numberOfVertices-1);
+    int betweenID=-1;
+    int closenessID=-1;
+    for(int i=0;i<numberOfVertices;i++){
+
+        betweenID = betweennessSorted[i].index;
+        closenessID = GetIdOfRanking(closenessID,numberOfVertices,betweenID);
+        //do shit for this
+    }
+
+
     FreeVertices(vertices,numberOfVertices);
     free(Next);
     free(floyDistance);
