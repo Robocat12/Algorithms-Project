@@ -197,14 +197,10 @@ NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolS
     return nodeCounts;
 }
 
-int GetIdOfRanking(NodeCount *array, int size, int lookingFor){
-    int i=0;
-    for(i=0;i<size;i++){
-        if(array[i].index==lookingFor){
-            return i;
-        }
-    }
-    return 0;
+int GetIdOfRanking(NodeCount *array, int size, int lookingFor){ //might not be needed, but ok to keep?
+    int i;
+    for(i=0;(i<size) && (array[i].index!=lookingFor); i++);
+    return i+1;
 }
 
 double kendal ( const unsigned int* rankPtr, const unsigned int size ) {
