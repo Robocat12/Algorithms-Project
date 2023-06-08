@@ -57,8 +57,8 @@ int main(int argc, char *argv[]) {
     }
 
     for( unsigned int vertice=0; vertice<numberOfVertices-1; vertice++ ){
-        rankPtr[vertice] = closenessSorted[vertice].index;
-        printf("%d: %d\n",vertice,closenessSorted[vertice].index);
+        rankPtr[vertice] = GetIdOfRanking(betweennessSorted,numberOfVertices, closenessSorted[vertice].index);
+        printf("closeness ranking%3d betweeeness ranking %3d\n",vertice,rankPtr[vertice]);
     }
     printf("Kendal coefficient is: %.3lf\n", kendal( rankPtr, numberOfVertices ));
 
