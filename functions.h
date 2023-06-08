@@ -34,9 +34,9 @@ extern int *FloydWarshall(vertex *vertices, int numbOfVertices,int **NextConnect
 extern NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices,int boolSort);
 extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolSort);
 
-extern void PrintNodeSorted(NodeCount *array,int size ,int maxNum);
+extern void PrintNodeSorted(NodeCount *array, int start, int size ,int maxNum);
 extern int GetIdOfRanking(NodeCount *array, int size, int lookingFor);
 
-double kendal ( const unsigned int* rankPtr, const unsigned int size );
+double kendal ( const int* rankPtr, const int size );
 
 #endif
