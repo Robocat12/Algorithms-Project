@@ -43,24 +43,25 @@ int main(int argc, char *argv[]) {
     NodeCount *closenessSorted=GetSortedClosenessCentrality(floyDistance,numberOfVertices,true);
     
     printf("The betweenness array is (bigger is better):\n");
-    PrintNodeSorted(betweennessSorted,numberOfVertices,10);
+    PrintNodeSorted(betweennessSorted, 0, numberOfVertices-1,10);
 
     printf("The closeness array is (total distance)(smaller is better):\n");
-    PrintNodeSorted(closenessSorted,numberOfVertices,10);
-    
-    /*With the betweeness being sorted in ascending order, we only need to compare the rankings of closeness.
-    Each pair of betweenes and closeness refers to the same node*/
-    unsigned int* rankPtr = (unsigned int*) malloc( numberOfVertices*sizeof(unsigned int) );
-    if ( rankPtr == null ) {
-        printf("Not enough memory to allocate for array creation.\n");
-        return -3;
-    }
+    PrintNodeSorted(closenessSorted, 1, numberOfVertices,11);
 
-    for( unsigned int vertice=0; vertice<numberOfVertices-1; vertice++ ){
-        rankPtr[vertice] = GetIdOfRanking(betweennessSorted,numberOfVertices, closenessSorted[vertice].index);
-        printf("closeness ranking%3d betweeeness ranking %3d\n",vertice,rankPtr[vertice]);
+    printf("Total number of vertices: %d\n",numberOfVertices-1);
+    
+    /*With the closeness being sorted in ascending order, we only need to compare the rankings of betweeness.
+    Each pair of betweenes and closeness rank refers to the same node*/
+    int* rankPtr = (int*) malloc( (numberOfVertices-1)*sizeof(int) );
+    if ( rankPtr == NULL ) {
+        printf("Not enough memory to allocate for array creation. Aborting calculating kendal\n");
     }
-    printf("Kendal coefficient is: %.3lf\n", kendal( rankPtr, numberOfVertices ));
+    else {
+        for( int vertice=1; vertice<numberOfVertices; vertice++ ){
+            rankPtr[vertice-1] = GetIdOfRanking(betweennessSorted,numberOfVertices,closenessSorted[vertice].index);
+        }
+        printf("Kendal coefficient is: %.3lf\n", kendal( rankPtr, (numberOfVertices - 1) ));
+    }
 
     free(rankPtr);
     FreeVertices(vertices,numberOfVertices);
