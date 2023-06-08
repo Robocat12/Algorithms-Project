@@ -203,7 +203,8 @@ int GetIdOfRanking(NodeCount *array, int size, int lookingFor){ //might not be n
     return i+1;
 }
 
-double kendal ( const unsigned int* rankPtr, const unsigned int size ) {
+
+double kendal ( const int* rankPtr, const unsigned int size ) {
 
     unsigned int counter1, counter2, val, disc_pairs = 0, numpairs;
     double kendal;
