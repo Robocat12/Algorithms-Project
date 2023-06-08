@@ -51,13 +51,14 @@ int main(int argc, char *argv[]) {
     /*With the betweeness being sorted in ascending order, we only need to compare the rankings of closeness.
     Each pair of betweenes and closeness refers to the same node*/
     unsigned int* rankPtr = (unsigned int*) malloc( numberOfVertices*sizeof(unsigned int) );
-    if ( rankPtr == NULL ) {
+    if ( rankPtr == null ) {
         printf("Not enough memory to allocate for array creation.\n");
         return -3;
     }
 
-    for( unsigned int vertice=0; vertice<numberOfVertices; vertice++ ){
+    for( unsigned int vertice=0; vertice<numberOfVertices-1; vertice++ ){
         rankPtr[vertice] = closenessSorted[vertice].index;
+        printf("%d: %d\n",vertice,closenessSorted[vertice].index);
     }
     printf("Kendal coefficient is: %.3lf\n", kendal( rankPtr, numberOfVertices ));
 

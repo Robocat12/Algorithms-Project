@@ -157,7 +157,9 @@ NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices,int boolSor
             }
         }
     }
-    for(i=0; i<numbOfVertices; i++) {
+    nodeCounts[0].index=0;
+    nodeCounts[0].count=INF;
+    for(i=1; i<numbOfVertices; i++) {
         nodeCounts[i].index = i;
         nodeCounts[i].count = pathCount[i];
     }
@@ -191,6 +193,7 @@ NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolS
     if(boolSort==true){
         qsort(nodeCounts, numbOfVertices, sizeof(NodeCount), compareNodeCounts);
     }
+
     return nodeCounts;
 }
 
@@ -201,6 +204,7 @@ int GetIdOfRanking(NodeCount *array, int size, int lookingFor){
             return i;
         }
     }
+    return 0;
 }
 
 double kendal ( const unsigned int* rankPtr, const unsigned int size ) {
