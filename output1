@@ -1,0 +1,28 @@
+allocating memory
+Calculating Floyd-Warshall. O(n^3) may take a few minutes
+memory: current progress = 0 / 35
+The betweenness array is (bigger is better):
+  1.)Node   1 is in 366
+  2.)Node  33 is in 205
+  3.)Node   3 is in 143
+  4.)Node  34 is in 127
+  5.)Node  32 is in  47
+  6.)Node   6 is in  36
+  7.)Node   2 is in  32
+  8.)Node  28 is in  31
+  9.)Node  24 is in  25
+ 10.)Node   9 is in  20
+The closeness array is (total distance)(smaller is better):
+  1.)Node   3 is in  59
+  2.)Node  34 is in  61
+  3.)Node  32 is in  61
+  4.)Node  33 is in  64
+  5.)Node   9 is in  64
+  6.)Node  14 is in  65
+  7.)Node  20 is in  67
+  8.)Node   2 is in  68
+  9.)Node   4 is in  71
+ 10.)Node  31 is in  72
+Total number of vertices: 34
+Kendal coefficient is: 0.647
+Time taken is 00:0.000790
