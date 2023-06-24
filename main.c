@@ -3,8 +3,12 @@
 #include <string.h>
 #include <unistd.h>
 #include "functions.h"
-
+# include<time.h>
 int main(int argc, char *argv[]) {
+
+    clock_t start, end;
+    double execution_time;
+    start = clock();
     if (argc != 2) {
         printf("You should run this ./%s filename", argv[0]);
         return 1; // Indicate an error by returning a non-zero value
@@ -42,21 +46,29 @@ int main(int argc, char *argv[]) {
     //sorts the floyDistance based on the distance to all nodes
     NodeCount *closenessSorted=GetSortedClosenessCentrality(floyDistance,numberOfVertices,true);
     
+
+   
+
     printf("The betweenness array is (bigger is better):\n");
     PrintNodeSorted(betweennessSorted, 0, numberOfVertices-1,10);
 
     printf("The closeness array is (total distance)(smaller is better):\n");
-    PrintNodeSorted(closenessSorted, 1, numberOfVertices,11);
+    PrintNodeSorted(closenessSorted, 0, numberOfVertices,40);
 
     printf("Total number of vertices: %d\n",numberOfVertices-1);
-    
+
+
+    NodeRanking *result=GetRankingsOfAll(betweennessSorted,closenessSorted,numberOfVertices);
+     for(int i=1;i<numberOfVertices;i++){
+        printf("Ranking of vector %d in S.P. %d, of Distance %d\n",i ,result[i].placeInA,result[i].placeInB);
+    }
     /*With the closeness being sorted in ascending order, we only need to compare the rankings of betweeness.
     Each pair of betweenes and closeness rank refers to the same node*/
-   int numOfCenters=-1;
-    while(numOfCenters<=0){
-        printf("How many centers do you want?:");
-        scanf(" %d",&numOfCenters);
-    }
+   int numOfCenters=1;
+    // while(numOfCenters<=0){
+    //     printf("How many centers do you want?:");
+    //     scanf(" %d",&numOfCenters);
+    // }
     int* rankPtr = (int*) malloc( (numberOfVertices-numOfCenters)*sizeof(int) );
    
     if ( rankPtr == NULL ) {
@@ -68,7 +80,11 @@ int main(int argc, char *argv[]) {
         }
         printf("Kendal coefficient is: %.3lf\n", kendal( rankPtr, (numberOfVertices - numOfCenters) ));
     }
-
+    end = clock();
+    double minutes;
+    execution_time = ((double)(end - start))/CLOCKS_PER_SEC;
+    minutes=execution_time/60;
+    printf("Time taken is %02.2lf minutes / %02lf seconds",minutes,execution_time);
     free(rankPtr);
     FreeVertices(vertices,numberOfVertices);
     free(Next);

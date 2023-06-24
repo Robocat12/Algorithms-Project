@@ -117,7 +117,7 @@ int *FloydWarshall(vertex *vertices, int numbOfVertices,int **NextConnection){
     //calculates the matrixes
     printf("Calculating Floyd-Warshall. O(n^3) may take a few minutes\n");
     for ( k = 0; k < numbOfVertices; k++) {
-        if(k%10==0)printf("memory: current progress = %d / %d\n",k,numbOfVertices);
+        if(k%1000==0)printf("memory: current progress = %d / %d\n",k,numbOfVertices);
         for ( i = 0; i < numbOfVertices; i++) {
             for ( j = 0; j < numbOfVertices; j++) {
 
@@ -220,4 +220,32 @@ double kendal ( const int* rankPtr, const unsigned int size ) {
     numpairs = (size*(size - 1) /2);
     kendal =  1 - ((2* (double) disc_pairs)/( (double) numpairs));
     return kendal;
+}
+NodeRanking *GetRankingsOfAll(NodeCount *array1, NodeCount *array2,int size){
+    NodeRanking *rankings=malloc(size*sizeof(NodeRanking));
+    int i=0;
+    for(i=0;i<size;i++){
+        rankings[i].placeInA=-1;
+        rankings[i].placeInB=-1;
+    }
+    int currentRanking=1;
+    rankings[array1[0].index].placeInA=1;
+    for(i=1;i<size;i++){
+        if(array1[i].count!=array1[i-1].count)
+        {
+            currentRanking++;
+            //currentRanking=i+1;
+        }
+            rankings[array1[i].index].placeInA=currentRanking;
+    }
+    currentRanking=1;
+    rankings[array2[0].index].placeInB=1;
+    for(i=1;i<size;i++){
+        if(array2[i].count!=array2[i-1].count)
+        {
+            currentRanking++;
+        }
+            rankings[array2[i].index].placeInB=currentRanking;
+    }
+    return rankings;
 }

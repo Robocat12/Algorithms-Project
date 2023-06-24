@@ -16,6 +16,11 @@ typedef struct NodeCount{
     int index;
     int count;
 } NodeCount;
+typedef struct NodeRanking{
+    int placeInA;
+    int placeInB;
+} NodeRanking;
+
 //gets the id of the biggest vertex
 extern int GetNumOfVertices(char * filename);
 //initializes the vertices
@@ -37,6 +42,6 @@ extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,in
 extern void PrintNodeSorted(NodeCount *array, int start, int size ,int maxNum);
 extern int GetIdOfRanking(NodeCount *array, int size, int lookingFor);
 
-double kendal ( const int* rankPtr, const unsigned int size );
-
+extern double kendal ( const int* rankPtr, const unsigned int size );
+extern NodeRanking *GetRankingsOfAll(NodeCount *array1, NodeCount *array2,int size);
 #endif
