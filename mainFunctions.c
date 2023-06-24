@@ -179,10 +179,18 @@ NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolS
         printf("failed to allocate memory 2\n");
         return null;
     }
-    for(i=0;i<numbOfVertices;i++){
-        for(j=0;j<numbOfVertices;j++){
+    int currentPos;
+    for(i=1;i<numbOfVertices;i++){
+        for(j=1;j<numbOfVertices;j++){
             if( Next[i*numbOfVertices + j]!=0){
-                pathCount[Next[i*numbOfVertices + j]]++;
+                currentPos=Next[i*numbOfVertices + j];
+                while(currentPos!=0){
+                    if(currentPos!=i&&currentPos!=j){
+                        pathCount[currentPos]++;
+                    }
+                   // printf("current Pos is (%d,%d). started at (%d,%d)\n",currentPos,j,i,j);
+                    currentPos=Next[currentPos*numbOfVertices + j];
+                }
             }
         }
     }

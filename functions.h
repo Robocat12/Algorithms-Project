@@ -31,6 +31,7 @@ extern void AddConnection(vertex *vertices,int vertex1, int vertex2);
 extern void PrintVertex(vertex vert, int vertNum);
 //prints all the connections of the network
 extern void PrintConnections(vertex *vertices, int numbOfVertices);
+extern void printDistanceMatrix(int *dist,int numbOfVertices);
 //frees memory
 extern int FreeVertices(vertex *vertices, int numbOfVertices);
 

@@ -41,6 +41,7 @@ int main(int argc, char *argv[]) {
     //untill you reach your destination
     floyDistance = FloydWarshall(vertices,numberOfVertices,&Next);
     if (!floyDistance||!Next) return -1;
+    printDistanceMatrix(Next,numberOfVertices);
     //sorts the next based on how many times a node is included in all shortest paths
     NodeCount *betweennessSorted=GetSortedBetweennessCentrality(Next,numberOfVertices,true);
     //sorts the floyDistance based on the distance to all nodes
@@ -50,7 +51,7 @@ int main(int argc, char *argv[]) {
    
 
     printf("The betweenness array is (bigger is better):\n");
-    PrintNodeSorted(betweennessSorted, 0, numberOfVertices-1,10);
+    PrintNodeSorted(betweennessSorted, 0, numberOfVertices-1,40);
 
     printf("The closeness array is (total distance)(smaller is better):\n");
     PrintNodeSorted(closenessSorted, 0, numberOfVertices,40);
