@@ -41,9 +41,9 @@ void printDistanceMatrix(int *dist,int numbOfVertices)
     }
 }
 //prints a nodeCount array
-void PrintNodeSorted(NodeCount *array, int size){
-    int i;
-    for(i=0; i<size; i++) {
-        printf("%3d.)Node %3d is in %3d\n", i+1, array[i].index, array[i].count);
+void PrintNodeSorted(NodeCount *array, int start, int size ,int maxNum){
+    int i, num_runtimes=((size>maxNum)?maxNum:size), num=(start)?-1:0;
+    for(i=start; i<num_runtimes; i++) {
+        printf("%3d.)Node %3d is in %3d\n", i+num+1, array[i].index, array[i].count);
     }
 }

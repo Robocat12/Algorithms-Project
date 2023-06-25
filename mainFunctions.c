@@ -205,60 +205,55 @@ NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolS
     return nodeCounts;
 }
 
-double kendal ( const int* x, const int* y, const int size ) {
+int GetIdOfRanking(NodeCount *array, int size, int lookingFor){ //might not be needed, but ok to keep?
+    int i;
+    for(i=0;(i<size) && (array[i].index!=lookingFor); i++);
+    return i+1;
+}
 
-    int i, j;
-    double kendal, numerator = 0, numpairs = 0, numties_x = 0, numties_y = 0, x_diff, y_diff;\
 
-    for ( i = 1; i < size - 1; i++ ) {
-        for ( j = i+1; j < size; j++ ) {
-            x_diff = (x[j] - x[i]), y_diff = (y[j] - y[i]);
-            numerator = numerator + sign(x_diff)*sign(y_diff);
-            numpairs++;
+double kendal ( const int* rankPtr, const unsigned int size ) {
 
-            if ( !x_diff ) {
-                numties_x++;
-            }
-            if ( !y_diff ) {
-                numties_y++;
+    unsigned int counter1, counter2, val, disc_pairs = 0, numpairs;
+    double kendal;
+
+    for ( counter1 = 0; counter1 < (size - 1); counter1++ ) {
+        val = rankPtr[counter1];
+        for ( counter2 = (counter1 + 1); counter2 < size; counter2++ ) {
+            if ( val > rankPtr[counter2] ) {
+                disc_pairs++;
             }
         }
     }
-    kendal = numerator/ sqrt( (numpairs - numties_x)*(numpairs - numties_y) );
+    numpairs = (size*(size - 1) /2);
+    kendal =  1 - ((2* (double) disc_pairs)/( (double) numpairs));
     return kendal;
 }
-
-NodeRanking *GetRankingsOfAll(NodeCount *array1, NodeCount *array2, int size){
-
-    int *rankA, *rankB, counter, curr_rankA = 1, curr_rankB = 1;
-    NodeRanking *rankingsPtr = (NodeRanking*) malloc(sizeof(NodeRanking));
-
-    rankA = (int*) malloc(size*sizeof(int));
-    rankB = (int*) malloc(size*sizeof(int));
-    if ( rankingsPtr == NULL || rankA == NULL || rankB == NULL ) {
-        return NULL;
+NodeRanking *GetRankingsOfAll(NodeCount *array1, NodeCount *array2,int size){
+    NodeRanking *rankings=malloc(size*sizeof(NodeRanking));
+    int i=0;
+    for(i=0;i<size;i++){
+        rankings[i].placeInA=-1;
+        rankings[i].placeInB=-1;
     }
-
-    rankA[array1[0].index] = 1, rankB[array2[0].index] = 1;
-    for ( counter = 1; counter < size - 1; counter++ ) {
-        if ( array1[counter].count != array1[counter - 1].count ) {
-            curr_rankA++;
+    int currentRanking=1;
+    rankings[array1[0].index].placeInA=1;
+    for(i=1;i<size;i++){
+        if(array1[i].count!=array1[i-1].count)
+        {
+            currentRanking++;
+            //currentRanking=i+1;
         }
-
-        if ( array2[counter].count != array2[counter - 1].count ) {
-            curr_rankB++;
-        }
-
-        rankA[array1[counter].index] = curr_rankA;
-        rankB[array2[counter].index] = curr_rankB;
+            rankings[array1[i].index].placeInA=currentRanking;
     }
-    rankingsPtr->rankA = rankA, rankingsPtr->rankB = rankB;
-
-    return rankingsPtr;
-}
-
-void free_rankings ( NodeRanking* rankPtr ) {
-    free(rankPtr->rankA);
-    free(rankPtr->rankB);
-    free(rankPtr);
+    currentRanking=1;
+    rankings[array2[0].index].placeInB=1;
+    for(i=1;i<size;i++){
+        if(array2[i].count!=array2[i-1].count)
+        {
+            currentRanking++;
+        }
+            rankings[array2[i].index].placeInB=currentRanking;
+    }
+    return rankings;
 }
