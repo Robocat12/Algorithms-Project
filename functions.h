@@ -42,7 +42,6 @@ extern NodeCount *GetSortedClosenessCentrality(int *dist,int numbOfVertices,int 
 extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolSort);
 
 extern void PrintNodeSorted(NodeCount *array, int start, int size ,int maxNum);
-extern int GetIdOfRanking(NodeCount *array, int size, int lookingFor);
 
 extern NodeRanking *GetRankingsOfAll(NodeCount *array1, NodeCount *array2,int size);
 #define sign(x) ((x>0) - (x<0))
