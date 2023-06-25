@@ -1,6 +1,7 @@
 #ifndef FUNCTIONS
 #define FUNCTIONS
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #include <string.h>
 #define null ((void *)0)
@@ -16,9 +17,9 @@ typedef struct NodeCount{
     int index;
     int count;
 } NodeCount;
-typedef struct NodeRanking{
-    int placeInA;
-    int placeInB;
+typedef struct nodeRanking{
+    int* rankA;
+    int* rankB;
 } NodeRanking;
 
 //gets the id of the biggest vertex
@@ -43,6 +44,9 @@ extern NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,in
 extern void PrintNodeSorted(NodeCount *array, int start, int size ,int maxNum);
 extern int GetIdOfRanking(NodeCount *array, int size, int lookingFor);
 
-extern double kendal ( const int* rankPtr, const unsigned int size );
 extern NodeRanking *GetRankingsOfAll(NodeCount *array1, NodeCount *array2,int size);
+#define sign(x) ((x>0) - (x<0))
+double kendal ( const int* x, const int* y, const int size );
+void free_rankings ( NodeRanking* rankPtr);
+
 #endif
