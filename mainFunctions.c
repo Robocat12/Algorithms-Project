@@ -205,12 +205,6 @@ NodeCount *GetSortedBetweennessCentrality(int *Next,int numbOfVertices,int boolS
     return nodeCounts;
 }
 
-int GetIdOfRanking(NodeCount *array, int size, int lookingFor){ //might not be needed, but ok to keep?
-    int i;
-    for(i=0;(i<size) && (array[i].index!=lookingFor); i++);
-    return i+1;
-}
-
 double kendal ( const int* x, const int* y, const int size ) {
 
     int i, j;
