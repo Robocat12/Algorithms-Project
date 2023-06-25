@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     start = clock();
     if (argc != 2) {
-        printf("You should run this ./%s filename", argv[0]);
+        printf("Needs only one argument of a readable file.\n");
         return 1; // Indicate an error by returning a non-zero value
     }
     // Read the file
