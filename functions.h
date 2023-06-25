@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #define null ((void *)0)
+#define INT16_MAX 1000000000
 #define INF INT16_MAX*2
 #define true 1
 #define false 0
